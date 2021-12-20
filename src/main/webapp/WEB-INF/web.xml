@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee; http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+	<display-name>SuamilProj</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+  
+	 
+	<!-- 세션유지시간설정(분단위) : 1시간으로 설정 -->
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	
+	
+	<context-param>
+		<param-name>PAGE_SIZE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BLOCK_PAGE</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	
+	
+	<!-- 리스트 -->
+	<servlet>
+		<servlet-name>CommunityList</servlet-name>
+		<servlet-class>controller.CommList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommunityList</servlet-name>
+		<url-pattern>/Community/CommList.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 글쓰기 -->
+	<servlet>
+		<servlet-name>CommWrite</servlet-name>
+		<servlet-class>controller.CommWrite</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommWrite</servlet-name>
+		<url-pattern>/Community/CommWrite.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 상세보기 -->
+	<servlet>
+	  <servlet-name>CommView</servlet-name>
+	  <servlet-class>controller.CommView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>CommView</servlet-name>
+	  <url-pattern>/Community/CommView.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 다운로드 -->
+	<servlet>
+	  <servlet-name>CommDownload</servlet-name>
+	  <servlet-class>controller.CommDownload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>CommDownload</servlet-name>
+	  <url-pattern>/Community/Download.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 패스워드 검증 -->
+	<servlet>
+		<servlet-name>CommPassword</servlet-name>
+		<servlet-class>controller.CommPassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommPassword</servlet-name>
+		<url-pattern>/Community/CommPassword.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 수정하기 -->
+	<servlet>
+		<servlet-name>CommEdit</servlet-name>
+		<servlet-class>controller.CommEdit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommEdit</servlet-name>
+		<url-pattern>/Community/CommEdit.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 삭제하기 -->
+	<servlet>
+		<servlet-name>CommDelete</servlet-name>
+		<servlet-class>controller.CommDelete</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommDelete</servlet-name>
+		<url-pattern>/Community/CommDelete.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 서블릿 게시판 답변글달기 -->
+	<servlet>
+		<servlet-name>CommReply</servlet-name>
+		<servlet-class>controller.CommReply</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommReply</servlet-name>
+		<url-pattern>/Community/CommReply.sua</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 회원로그인 -->
+	<servlet>
+		<servlet-name>MemberLoginProcess</servlet-name>
+		<servlet-class>controller.LoginProc</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberLoginProcess</servlet-name>
+		<url-pattern>/Member/LoginProc.sua</url-pattern>
+	</servlet-mapping>  
+	
+	
+	
+  
+</web-app>
