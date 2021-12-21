@@ -41,6 +41,7 @@ int last_day = dSet.getActualMaximum(Calendar.DATE);
 	</colgroup>
 	<tr>
 	<%
+	int yoFlag = yo;//일단 오늘의 요일을 저장
 	String[] a = { "sun", "mon", "tue", "wed", "thu", "fri", "sat" };
 	for (int i = 0; i < 7; i++) {
 	%>
@@ -60,22 +61,24 @@ int last_day = dSet.getActualMaximum(Calendar.DATE);
 	%>
 	<%
 	for (int j = 1; j <= last_day; j++) {
+		yoFlag++;//날짜가 반복될때 증가
 	%>
-		<!-- 날짜가 출력되는 부분 <%=y%>-<%=m+1%>-<%=j%> -->
+		<!-- 날짜가 출력되는 부분 <%=y%>-<%=m+1%>-<%=j%> <%=yoFlag%>-->
 		<td><%=j%></td> 
 	<%if ((yo+j-1) % 7 == 0) {%>
 	</tr>
 	<tr>
 	<%
+		yoFlag = 0;
 		}
 	}
-	for(int e=1;e<(7-yo)-1;e++){
+	
+	for(int e=yoFlag ; e<7 ; e++){
 	%>
 		<td></td>
 	<%
 	}
-	%>
-	</tr>
+	%> 
 </table>
 <%
 /*

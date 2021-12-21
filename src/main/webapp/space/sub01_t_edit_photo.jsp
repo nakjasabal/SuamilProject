@@ -74,7 +74,7 @@ dao.close();//DB자원반납
 						}
 					</script>					
 					<table class="table table-bordered table-striped">
-					<form name="writeFrm" method="post" action="./proc/write_proc_photo.jsp" onsubmit="return isValidate(this);" enctype="multipart/form-data">
+					<form name="writeFrm" method="post" action="./proc/edit_proc_photo.jsp" onsubmit="return isValidate(this);" enctype="multipart/form-data">
 					<input type="hidden" name="b_flag" value="<%=b_flag%>" /> 
 					<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 					<input type="hidden" name="nowPage" value="<%=nowPage%>" />

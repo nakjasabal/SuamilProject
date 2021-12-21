@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import util.PagingUtil;
 
-
 public class CommList extends HttpServlet{
 
 	/*

@@ -45,11 +45,9 @@ String b_flag =
 	request.getParameter("b_flag")==null 
 		? "notice" : request.getParameter("b_flag");
 
-
-String photoLink = "";
-if(b_flag.equals("photo")){
-	photoLink="_photo";
-}
+//켈린더 추가
+String y = request.getParameter("y");
+String m = request.getParameter("m");
 %>  
 <%@ include file="common_space.jsp" %>	
  <body>
@@ -101,7 +99,7 @@ if(b_flag.equals("photo")){
 						</tr>
 						<tr>
 							<th class="text-center table-active align-middle">내용</th>
-							<td colspan="3" class="align-middle" style="height:200px;">
+							<td colspan="3" class="align-middle" style="height:150px;">
 								${dto.content }
 							</td>
 						</tr>
@@ -119,29 +117,34 @@ if(b_flag.equals("photo")){
 				<div class="row mb-3">
 					<div class="col-6">
 					<% 
+					String listLink = "", editLink = "";
+					
+					switch(b_flag){
+					case "program": //프로그램일정
+						listLink = "sub01_t_list_cal.jsp?b_flag="+b_flag+"&y="+y+"&m="+m;	 
+						editLink = "sub01_t_edit_cal.jsp?num="+dto.getNum()+"&b_flag="+b_flag+"&nowPage="+nowPage;
+						break;
+					case "photo": //사진게시판
+						listLink = "sub01_t_list_photo.jsp?b_flag="+b_flag+"&nowPage="+nowPage; 
+						editLink = "sub01_t_edit_photo.jsp?num="+dto.getNum()+"&b_flag="+b_flag+"&nowPage="+nowPage;
+						break;
+					default: 
+						listLink = "sub01_t_list.jsp?b_flag="+b_flag+"&nowPage="+nowPage; 
+						editLink = "sub01_t_edit.jsp?num="+dto.getNum()+"&b_flag="+b_flag+"&nowPage="+nowPage;
+					}
+					
 					if(session.getAttribute("USER_ID")!=null && session.getAttribute("USER_ID").toString().equals(dto.getId()))
-					{
+					{						
 					%>	
-						<button type="button" class="btn btn-secondary" 
-							onclick="location.href='sub01_t_edit<%=photoLink %>.jsp?num=<%=dto.getNum()%>&b_flag=<%=b_flag%>&nowPage=<%=nowPage%>';">수정하기</button>
-						<button type="button" class="btn btn-success" 
-							onclick="isDelete();">삭제하기</button>	
+						<button type="button" class="btn btn-secondary" onclick="location.href='<%=editLink %>';">수정하기</button> 
+						<button type="button" class="btn btn-success" onclick="isDelete();">삭제하기</button>	
 						<!-- <button type="button" class="btn btn-info">답글쓰기</button> -->
 					<%
 					}
 					%>
 					</div>
 					<div class="col-6 text-right pr-5">
-						<!-- 각종 버튼 부분 -->
-						<!-- <button type="button" class="btn">Basic</button> -->
-						<!-- <button type="button" class="btn btn-primary" 
-							onclick="location.href='BoardWrite.jsp';">글쓰기</button> -->
-						<!-- 
-						<button type="button" class="btn btn-light">Light</button>
-						<button type="submit" class="btn btn-danger">전송하기</button>
-						<button type="reset" class="btn btn-dark">Reset</button>
-						<button type="button" class="btn btn-link">Link</button> -->
-						<button type="button" class="btn btn-warning" onclick="location.href='sub01_t_list<%=photoLink %>.jsp?b_flag=<%=b_flag%>&nowPage=<%=nowPage%>';">리스트보기</button>
+						<button type="button" class="btn btn-warning" onclick="location.href='<%=listLink %>';">리스트보기</button>
 					</div>
 					</form>
 				</div>
@@ -151,5 +154,5 @@ if(b_flag.equals("photo")){
 	</div>
 
 	<%@ include file="../include/footer.jsp" %>
- </body>
+</body>
 </html>

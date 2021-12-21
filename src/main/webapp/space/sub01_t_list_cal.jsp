@@ -8,29 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
-<%@ include file="logic_list.jsp" %>
-<%@ include file="common_space.jsp" %>	
-<style>
-.dayCell{height: 100px;}
-</style>
-<body>
-	<div id="wrap">
-		<%@ include file="../include/top.jsp" %>
-
-		<img src="../images/space/sub_image.jpg" id="main_visual" />
-
-		<div class="contents_box">
-			<div class="left_contents">
-				<%@ include file = "../include/space_leftmenu.jsp" %>
-			</div>
-			<div class="right_contents">		
-				<div class="top_title">
-					<img src="../images/space/<%=title_image%>" alt="공지사항" class="con_title" />
-					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;<%=path_str%><p>
-				</div>				
-				<div class="mt-3">
-					<!-- 게시판리스트부분 -->
-					<!-- <table class="table table-bordered table-hover table-striped"> -->
 <%
 //현재 년/월/일을 구하기 위한 인스턴스 생성
 Calendar tDay = Calendar.getInstance();
@@ -74,13 +51,51 @@ else{
 	nextY = y;
 	nextM = m + 1;
 }
+
+request.setCharacterEncoding("UTF-8");
+SuamilDAO dao = new SuamilDAO();
+Map<String,Object> param = new HashMap<String,Object>();
+String b_flag = request.getParameter("b_flag")==null ? "notice" : request.getParameter("b_flag");
+param.put("b_flag", b_flag);
+System.out.println("b_flag="+b_flag);
+String queryStr = "b_flag="+b_flag+"&";
+
+//m은 0~11까지이므로 +1 해야한다.
+m++;
+String mm = (m<10) ? "0"+m : ""+m;
+String dateParam = y+"-"+mm;
+Map<String, BoardDTO> calendar = dao.calendarList(dateParam);
+dao.close();
 %>
-<div class="text-center">
-	<a href="?y=<%=prevY %>&m=<%=prevM %>">[이전달]</a>
+<%@ include file="common_space.jsp" %>
+<style>
+.dayCell{height: 100px;}
+</style>
+<body>
+	<div id="wrap">
+		<%@ include file="../include/top.jsp" %>
+
+		<img src="../images/space/sub_image.jpg" id="main_visual" />
+
+		<div class="contents_box">
+			<div class="left_contents">
+				<%@ include file = "../include/space_leftmenu.jsp" %>
+			</div>
+			<div class="right_contents">		
+				<div class="top_title">
+					<img src="../images/space/<%=title_image%>" alt="공지사항" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;<%=path_str%><p>
+				</div>				
+				<div class="mt-3">
+					<!-- 게시판리스트부분 -->
+					<!-- <table class="table table-bordered table-hover table-striped"> -->
+
+<div class="text-center" style="font-size: 1.5em;">
+	<a href="?b_flag=program&y=<%=prevY %>&m=<%=prevM %>">[이전달]</a>
 	&nbsp;&nbsp;
-	<%=y %>년 <%=m+1 %>월
+	<%=y %>년 <%=m %>월
 	&nbsp;&nbsp;
-	<a href="?y=<%=nextY %>&m=<%=nextM %>">[다음달]</a>	
+	<a href="?b_flag=program&y=<%=nextY %>&m=<%=nextM %>">[다음달]</a>	
 </div>
 <table class="table table-bordered">
 	<colgroup>
@@ -94,6 +109,7 @@ else{
 	</colgroup>
 	<tr class="table-active">
 	<%
+	int yoFlag = yo;//일단 오늘의 요일을 저장
 	String[] a = { "sun", "mon", "tue", "wed", "thu", "fri", "sat" };
 	for (int i = 0; i < 7; i++) {
 	%>
@@ -113,22 +129,36 @@ else{
 	%>
 	<%
 	String tableColor ;
-	for (int j = 1; j <= last_day; j++) {		
+	for (int j = 1; j <= last_day; j++) {	
+		yoFlag++;//날짜가 반복될때 증가
 		if((yo+j-1) % 7 == 0) tableColor="table-primary";
 		else if((yo+j-1) % 7 == 1) tableColor="table-danger";
 		else tableColor="";
+		
+		String jj = (j<10) ? "0"+j : ""+j;
+		String key = y+"-"+mm+"-"+jj;
 	%>
-		<!-- 날짜가 출력되는 부분 <%=y%>-<%=m%>-<%=j%> -->
-		<td class="dayCell <%=tableColor%>"><%=j%></td> 
+		<!-- 날짜가 출력되는 부분 <%=key%> -->
+		<td class="dayCell <%=tableColor%>">
+			<div><%=j%></div>
+			<div>
+				<% if(calendar.get(key)!=null){ %>
+					<a href="./sub01_t_view.jsp?y=<%=y %>&m=<%=m-1 %>&num=<%=calendar.get(key).getNum() %>&b_flag=program"><%=calendar.get(key).getTitle() %></a>
+				<% } %>
+			</div>
+		</td> 
 	<%if ((yo+j-1) % 7 == 0) {%>
 	</tr>
 	<tr>
 	<%
+		yoFlag = 0;
 		}
 	}
-	for(int e=1;e<(7-yo)-1;e++){
+	
+	//for(int e=yoFlag ; e<7 ; e++){
+	if((7-yoFlag)<7){
 	%>
-		<td></td>
+		<td colspan="<%=(7-yoFlag) %>"></td>
 	<%
 	}
 	%>

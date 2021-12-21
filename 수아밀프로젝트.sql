@@ -71,7 +71,7 @@ create sequence seq_borad_num
 	nocycle ;
     
 
-    
+
 
    
    

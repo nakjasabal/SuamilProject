@@ -355,6 +355,40 @@ public class SuamilDAO {
 		return bbs;
 	}
 	
+	public Map<String, BoardDTO> calendarList(String dateParam){
+		
+		//1.결과 레코드셋을 담기위한 리스트계열 컬렉션생성 
+		Map<String, BoardDTO> calendar = new HashMap<String, BoardDTO>();
+		
+		//2.게시물 전체를 가져오기 위한 쿼리작성
+		String query = "SELECT B.*, to_char(postdate, 'yyyy-mm-dd') pdate "
+				+ " FROM sua_board B"
+				+ " WHERE b_flag='program' AND to_char(postdate, 'yyyy-mm')='"+dateParam+"' "
+				+ " ORDER BY postdate ASC";		
+		System.out.println("쿼리문:"+ query);			
+			
+		try {
+			psmt = con.prepareStatement(query);			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getString("pdate")+" "+rs.getString("title"));
+				
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setPostDateStr(rs.getString("pdate"));
+				
+				calendar.put(rs.getString("pdate"), dto);
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Select시 예외발생");
+			e.printStackTrace();
+		}
+		
+		return calendar;
+	}
+	
 	
 	//게시판 글쓰기 처리
 	public int insertWrite(BoardDTO dto) {

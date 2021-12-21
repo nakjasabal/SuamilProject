@@ -33,6 +33,16 @@ if(postdate!=null)
 SuamilDAO dao = new SuamilDAO();
 
 int affected = dao.insertWrite(dto);
+
+//더미데이터 100개 입력하기s
+/* int affected = 1;
+for(int i=1 ; i<=100 ; i++){
+	dto.setTitle(title+"-"+i);
+	dao.insertWrite(dto);
+} */
+//더미데이터 100개 입력하기e
+
+dao.close();
 if(affected==1){
 	if(b_flag.equals("program")){
 		response.sendRedirect("../sub01_t_list_cal.jsp?b_flag="+b_flag);
