@@ -122,7 +122,7 @@ String m = request.getParameter("m");
 					switch(b_flag){
 					case "program": //프로그램일정
 						listLink = "sub01_t_list_cal.jsp?b_flag="+b_flag+"&y="+y+"&m="+m;	 
-						editLink = "sub01_t_edit_cal.jsp?num="+dto.getNum()+"&b_flag="+b_flag+"&nowPage="+nowPage;
+						editLink = "sub01_t_edit_cal.jsp?num="+dto.getNum()+"&b_flag="+b_flag+"&y="+y+"&m="+m;
 						break;
 					case "photo": //사진게시판
 						listLink = "sub01_t_list_photo.jsp?b_flag="+b_flag+"&nowPage="+nowPage; 

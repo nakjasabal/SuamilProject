@@ -10,8 +10,7 @@ String b_flag =
 		? "notice" : request.getParameter("b_flag");
 %>
 <%@ include file="common_space.jsp" %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="//resources/demos/style.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script>
     $( function() {
