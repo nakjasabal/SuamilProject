@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ include file="../include/global_head.jsp" %>
-
-
- <body>
-	<center>
+<body>
 	<div id="wrap">
 		<%@ include file="../include/top.jsp" %>
 
@@ -29,8 +27,6 @@
 						<col width="10%" />
 						<col width="8%" />
 						<col width="10%" />
-						<col width="10%" />
-						<col width="10%" />
 						<col width="8%" />
 					</colgroup>
 					<thead>
@@ -41,36 +37,27 @@
 							<th>판매가</th>
 							<th>적립금</th>
 							<th>수량</th>
-							<th>배송구분</th>
-							<th>배송비</th>
 							<th>합계</th>
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach begin="1" end="3" step="1" var="i">
 						<tr>
 							<td><input type="checkbox" name="" value="" /></td>
 							<td><img src="../images/market/cake_img1.jpg" /></td>
 							<td>녹차 쌀 무스케잌</td>
 							<td>30,000원</td>
 							<td><img src="../images/market/j_icon.gif" />&nbsp;300원</td>
-							<td><input type="text" name="" value="2" class="basket_num" />&nbsp;<a href=""><img src="../images/market/m_btn.gif" /></a></td>
-							<td>무료배송</td>
-							<td>[조건]</td>
+							<td>2EA</td>
 							<td><span>60,000원<span></td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="" value="" /></td>
-							<td><img src="../images/market/cake_img1.jpg" /></td>
-							<td>녹차 쌀 무스케잌</td>
-							<td>30,000원</td>
-							<td><img src="../images/market/j_icon.gif" />&nbsp;300원</td>
-							<td><input type="text" name="" value="2" class="basket_num" />&nbsp;<a href=""><img src="../images/market/m_btn.gif" /></a></td>
-							<td>무료배송</td>
-							<td>[조건]</td>
-							<td><span>60,000원<span></td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
+				<p class="basket_text" style="font-size:1.3em;">
+					<span>상품구매금액</span> 137,000 + <span>배송비</span> 0 = 
+					합계 : <span class="money" style="font-size:1.3em;">137,000원</span>
+				</p>
 
 				<p class="con_tit"><img src="../images/market/basket_title02.gif" /></p>
 				<table cellpadding="0" cellspacing="0" border="0" class="con_table" style="width:100%;" style="margin-bottom:50px;">
@@ -154,6 +141,5 @@
 	
 
 	<%@ include file="../include/footer.jsp" %>
-	</center>
- </body>
+</body>
 </html>

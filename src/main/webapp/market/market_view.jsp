@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
-
-
- <body>
-	<center>
+<body>
 	<div id="wrap">
 		<%@ include file="../include/top.jsp" %>
 
@@ -33,20 +30,20 @@
 							<li>
 								<dl>
 									<dt>가격</dt>
-									<dd class="p_style">30,000</dd>
+									<dd class="p_style">30,000원</dd>
 								</dl>
 								<dl>
 									<dt>적립금</dt>
-									<dd>300</dd>
+									<dd>300원</dd>
 								</dl>
 								<dl>
 									<dt>수량</dt>
-									<dd><input type="text" name="" value="1" class="n_box" /></dd>
+									<dd><input type="number" name="amount" value="1" class="n_box" /></dd>
 								</dl>
-								<dl style="border-bottom:0px;">
+								<!-- <dl style="border-bottom:0px;">
 									<dt>주문정보</dt>
 									<dd><input type="text" name="" class="n_box" style="width:200px;" /></dd>
-								</dl>
+								</dl> -->
 								<div style="clear:both;"></div>
 							</li>
 						</ul>
@@ -59,9 +56,7 @@
 		</div>
 		<%@ include file="../include/quick.jsp" %>
 	</div>
-	
 
 	<%@ include file="../include/footer.jsp" %>
-	</center>
  </body>
 </html>
