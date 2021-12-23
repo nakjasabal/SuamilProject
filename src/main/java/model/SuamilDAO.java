@@ -371,7 +371,7 @@ public class SuamilDAO {
 			psmt = con.prepareStatement(query);			
 			rs = psmt.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getString("pdate")+" "+rs.getString("title"));
+				System.out.println(rs.getString("pdate")+" "+rs.getString("num")+" "+rs.getString("title"));
 				
 				BoardDTO dto = new BoardDTO();
 				dto.setNum(rs.getString("num"));

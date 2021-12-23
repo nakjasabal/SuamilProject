@@ -143,7 +143,8 @@ dao.close();
 			<div><%=j%></div>
 			<div>
 				<% if(calendar.get(key)!=null){ %>
-					<a href="./sub01_t_view.jsp?y=<%=y %>&m=<%=m-1 %>&num=<%=calendar.get(key).getNum() %>&b_flag=program"><%=calendar.get(key).getTitle() %></a>
+					<a href="./sub01_t_view.jsp?y=<%=y %>&m=<%=m-1 %>&num=<%=calendar.get(key).getNum() %>&b_flag=program">
+						<%=calendar.get(key).getTitle() %></a>
 				<% } %>
 			</div>
 		</td> 
